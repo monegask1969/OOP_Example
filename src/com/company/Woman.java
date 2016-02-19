@@ -12,6 +12,8 @@ public class Woman extends People {
         super(gender, first_name, second_name, height, weight);
     }
 
+    public Woman(){}
+
     @Override
     public boolean isGender() {
         return super.isGender();
@@ -78,18 +80,11 @@ public class Woman extends People {
     }
 
     @Override
-    People relationships(People human, People father, People mother) {
-
-        if(this.speak(human)==true && this.withstand_community(human)==true && this.spend_time_together(human)==true)
-        {
-            if(this.getClass() == human.getClass()){return null;}
-            else born_human(human,father, mother);
-        }
-        else return null;
-        return null;
+    People relationships(People human) {
+        return super.relationships(human);
     }
 
-    People born_human(People human, People father, People mother)
+    static People born_human(People father, People mother)
     {
         Random random = new Random();
         boolean human2 = random.nextBoolean();
@@ -100,11 +95,6 @@ public class Woman extends People {
                 father.getSecond_name(),
                 (float)(father.getHeight()+0.1*mother.getHeight()-father.getHeight()),
                 (float)(father.getWeight()+0.1*mother.getWeight()-father.getWeight()));
-       /* child.setGender(true);
-        child.setFirst_name(name=scanner.next());
-        child.setSecond_name(father.getSecond_name());
-        child.setHeight((float)(father.getHeight()+0.1*mother.getHeight()-father.getHeight()));
-        child.setWeight((float)(father.getWeight()+0.1*mother.getWeight()-father.getWeight()));*/
         return child;
         }
         else{
@@ -113,11 +103,6 @@ public class Woman extends People {
                     father.getSecond_name(),
                     (float)(mother.getHeight()+0.1*father.getHeight()-mother.getHeight()),
                     (float)(mother.getWeight()+0.1*father.getWeight()-mother.getWeight()));
-            /*human.setGender(false);
-            child.setFirst_name(name=scanner.next());
-            child.setSecond_name(father.getSecond_name());
-            child.setHeight((float)(mother.getHeight()+0.1*father.getHeight()-mother.getHeight()));
-            child.setWeight((float)(mother.getWeight()+0.1*father.getWeight()-mother.getWeight()));*/
         return child;
         }
     }

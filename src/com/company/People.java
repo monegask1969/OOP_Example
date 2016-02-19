@@ -22,6 +22,9 @@ public abstract class People {
         this.weight = weight;
     }
 
+    protected People() {
+    }
+
     public boolean isGender() {
         return gender;
     }
@@ -72,22 +75,46 @@ public abstract class People {
 
     public boolean speak(People human)
     {
-        Random rand = new Random();
         if(getClass() == Woman.class && human.getClass() == Woman.class) return true;
         if(getClass() == Woman.class && human.getClass() == Man.class) return true;
         if(getClass() == Man.class && human.getClass() == Woman.class) return true;
-        if(getClass() == Man.class && human.getClass() == Man.class) return rand.nextBoolean();
+
+        if(getClass() == Man.class && human.getClass() == Man.class)
+        {
+            double r = Math.random()*1;
+            if(r <= 0.5) return true;
+            else return false;
+        }
         else return false;
 
     }
 
     public boolean withstand_community(People human)
     {
-        Random rand = new Random();
-        if(getClass() == Woman.class && human.getClass() == Woman.class) return true;
-        if(getClass() == Woman.class && human.getClass() == Man.class) return true;
-        if(getClass() == Man.class && human.getClass() == Woman.class) return true;
-        if(getClass() == Man.class && human.getClass() == Man.class) return rand.nextBoolean();
+        if(getClass() == Woman.class && human.getClass() == Woman.class)
+        {
+            double r = Math.random()*1;
+            if(r <= 0.05) return true;
+            else return false;
+        }
+        if(getClass() == Woman.class && human.getClass() == Man.class)
+        {
+            double r = Math.random()*1;
+            if(r <= 0.7) return true;
+            else return false;
+        }
+        if(getClass() == Man.class && human.getClass() == Woman.class)
+        {
+            double r = Math.random()*1;
+            if(r <= 0.7) return true;
+            else return false;
+        }
+        if(getClass() == Man.class && human.getClass() == Man.class)
+        {
+            double r = Math.random()*1;
+            if(r <= 0.056) return true;
+            else return false;
+        }
         else return false;
     }
 
@@ -100,13 +127,15 @@ public abstract class People {
         else return false;
     }
 
-    People relationships(People human)
-    {
+    People relationships(People human) {
+
         if(this.speak(human)==true && this.withstand_community(human)==true && this.spend_time_together(human)==true)
         {
             if(this.getClass() == human.getClass()){return null;}
-            else return null;
+            else Woman.born_human(this, human);
         }
         else return null;
+        return null;
     }
+
 }
